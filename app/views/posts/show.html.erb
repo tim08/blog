@@ -1,0 +1,42 @@
+<h2><strong><%= @post.title %></strong></h2>
+<div>
+
+  <%= @post.body %>
+</div>
+
+<div>
+  <strong>Теги:</strong>
+  <%= @post.tags_str %>
+</div>
+
+<% if user_signed_in? %>
+    <%= link_to 'Редактировать', edit_post_path(@post) %>
+<% end %>
+
+
+<h2>Комментарии:</h2>
+<% @post.comments.each do |comment| %>
+    <p>
+      <span id="right_s"><%= comment.user.email %>(<%= comment.created_at.strftime('%d-%m-%Y  %H:%M') %>) писал:</span>
+    </p>
+
+    <p>
+      <%= comment.body %>
+    </p>
+    <hr>
+<% end %>
+
+<h2>Добавить комментарий:</h2>
+<% if user_signed_in? %>
+    <%= form_for([@post, @post.comments.build]) do |f| %>
+        <p>
+
+          <%= f.text_area :body, :size => '60x10' %>
+        </p>
+        <p>
+          <%= f.submit %>
+        </p>
+    <% end %>
+<% else %>
+    Войдите в систему чтобы оставить комментарий.
+<% end %>

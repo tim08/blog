@@ -1,0 +1,31 @@
+#auth_header {
+  float: right;
+}
+
+.menu {
+  float: left;
+  width: 20%;
+}
+
+.content {
+  background: ghostwhite;
+  float: left;
+  width: 70%;
+  box-sizing: border-box;
+  padding: 20px;
+}
+
+p {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+#right_s{
+  float: right;
+}
+
+#left_s{
+  //float: left;
+  font-size: 10px;
+}

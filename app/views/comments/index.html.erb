@@ -1,0 +1,32 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Мои комментарии</h1>
+
+<table>
+  <thead>
+  <tr>
+    <th>Пост</th>
+    <th>Коммент</th>
+    <th colspan="2"></th>
+  </tr>
+  </thead>
+
+  <tbody>
+  <% @comments.each do |comment| %>
+      <tr>
+        <td><%= link_to "Пост #{comment.post.id}", post_path(comment.post), target: '_blank' %></td>
+        <td><%= comment.body %></td>
+        <% unless comment.already_passed? %>
+            <td><%= link_to 'Edit', edit_comment_path(comment) %></td>
+            <td><%= link_to 'Destroy', comment, method: :delete, data: {confirm: 'Are you sure?'} %></td>
+            <% else %>
+            <td colspan="2">Уже прошло 15 минут</td>
+        <% end %>
+      </tr>
+  <% end %>
+  </tbody>
+</table>
+
+<br>
+
+

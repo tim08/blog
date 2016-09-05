@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Blog</title>
+  <%= csrf_meta_tags %>
+
+  <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+</head>
+
+<body>
+<h2><%= link_to 'Блог (На главную)', root_path %></h2>
+<div id="auth_header">
+  <% if user_signed_in? %>
+      Logged in as <strong><%= current_user.email %></strong>.
+      <%= link_to 'Профиль', edit_user_registration_path %> |
+      <%= link_to "Выйти", destroy_user_session_path, method: :delete %>
+  <% else %>
+      <%= link_to "Регистрация", new_user_registration_path %> |
+      <%= link_to "Войти", new_user_session_path %>
+  <% end %>
+</div>
+<p id="notice"><%= notice %></p>
+
+<div class="menu">
+  <% if user_signed_in? %>
+      <ul>
+        <li><%= link_to 'Мои посты', my_posts_path %></li>
+        <li><%= link_to 'Мои комментарии', comments_path %></li>
+      </ul>
+  <% end %>
+
+  Теги:
+  <% @tags_arr_names.each do |t| %>
+      <%= link_to t, root_path(tag: t) %>
+  <% end %>
+</div>
+<div class="content">
+  <h2><%= link_to 'Создать пост', new_post_path %></h2>
+  <%= yield %>
+</div>
+
+</body>
+</html>

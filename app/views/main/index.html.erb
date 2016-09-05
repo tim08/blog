@@ -1,0 +1,16 @@
+<% @posts.each do |post| %>
+    <div>
+      <strong><%= post.title %></strong>
+      <p><%= post.body %></p>
+      <p>
+        <span id="left_s">Автор:<%= post.user.email %>(<%= post.created_at.strftime('%d-%m-%Y  %H:%M') %>)</span>
+        <span id="right_s"><%= link_to 'Читать далее', post_path(post) %></span>
+      </p>
+    </div>
+    <hr>
+<% end %>
+<%= will_paginate @posts %>
+
+
+
+

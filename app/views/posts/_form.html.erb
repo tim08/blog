@@ -1,0 +1,44 @@
+<%= form_for(post) do |f| %>
+    <% if post.errors.any? %>
+        <div id="error_explanation">
+          <h2><%= pluralize(post.errors.count, "error") %> prohibited this post from being saved:</h2>
+
+          <ul>
+            <% post.errors.full_messages.each do |message| %>
+                <li><%= message %></li>
+            <% end %>
+          </ul>
+        </div>
+    <% end %>
+
+    <div class="field">
+      <%= f.label :title %>
+      <%= f.text_field :title %>
+    </div>
+
+    <div class="field">
+      <%= f.label :body %>
+      <%= f.text_area :body, :size => '60x10' %>
+    </div>
+
+    <div class="field">
+      <%= f.label :active %>
+      <%= f.check_box :active %>
+    </div>
+
+    <% if @post.persisted? %>
+        <div class="field">
+          <%= f.label :created_at %>
+          <%= f.datetime_local_field :created_at %>
+        </div>
+    <% end %>
+
+    <div class="field">
+      Теги(через запятую)
+      <%= f.text_field :tags_str %>
+    </div>
+
+    <div class="actions">
+      <%= f.submit %>
+    </div>
+<% end %>
